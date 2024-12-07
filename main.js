@@ -220,7 +220,7 @@ function checkScroll() {
     });
 }
 
-window.addEventListener('scroll', debounce(checkScroll, 100));
+window.addEventListener('scroll', debounce(checkScroll, 100), { passive: true });
 checkScroll();
 
 document.addEventListener('DOMContentLoaded', function() {

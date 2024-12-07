@@ -380,7 +380,7 @@ color: white;
     font-family: 'Glancyr';
     src: url('assets/fonts/Glancyr-Light.otf') format('opentype');
     font-weight: 300;
-    font-display: swap;  // Add this line
+    font-display: swap;
 }
 
 @font-face {
@@ -394,7 +394,7 @@ color: white;
     src: url('assets/fonts/Satoshi-Regular.woff2') format('woff2'),
          url('assets/fonts/Satoshi-Regular.woff') format('woff');
     font-weight: 400;
-    font-display: swap;  // Add this line 
+    font-display: swap;
 }
 
 @font-face {
@@ -409,34 +409,22 @@ color: white;
     position: relative;
     z-index: 3;
     background: linear-gradient(180deg, #ffffff 0%, #f8f8f8 100%);
-    padding: 120px 10%;
+    padding: 80px 10% 120px; /* Reduced top padding from 120px to 80px */
     color: #050505;
     overflow: hidden;
 }
 
 .philosophy-header {
     text-align: center;
-    margin-bottom: 80px;
+    margin-bottom: 60px; /* Reduced from 80px */
     position: relative;
 }
-
-/* .philosophy-header::after {
-    content: '';
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 3px;
-    background: #EC4524;
-    border-radius: 2px;
-} */
 
 .philosophy-header h2 {
     font-family: 'Glancyr', sans-serif;
     font-size: 3rem;
     font-weight: 300;
-    margin-bottom: 40px;  /* Increased spacing between headings */
+    margin-bottom: 30px; /* Reduced from 40px */
     background: linear-gradient(45deg, #050505, #333);
     -webkit-background-clip: text;
     background-clip: text;
@@ -2538,11 +2526,11 @@ h2 span.highlight {
 /* Philosophy Section Mobile Adjustments */
 @media (max-width: 768px) {
     .philosophy {
-        padding: 60px 5%;  /* Reduced padding */
+        padding: 60px 5% 100px; /* Reduced padding for mobile */
     }
 
     .philosophy-header {
-        margin-bottom: 40px;  /* Reduced margin */
+        margin-bottom: 40px; /* Further reduced margin for mobile */
     }
 
     .philosophy-header h2 {
