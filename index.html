@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+    
+    <!-- Standard Favicons -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon/32x32.svg" sizes="any" width="32" height="32">
+    <link rel="icon" type="image/png" href="assets/favicon/16x16@2x.png" sizes="16x16" width="16" height="16">
+    <link rel="icon" type="image/png" href="assets/favicon/32x32@2x.png" sizes="32x32" width="32" height="32">
+    <link rel="icon" type="image/png" href="assets/favicon/48x48@2x.png" sizes="48x48" width="48" height="48">
+    <link rel="icon" type="image/png" href="assets/favicon/64x64@2x.png" sizes="64x64" width="64" height="64">
+    <link rel="icon" type="image/png" href="assets/favicon/96x96@2x.png" sizes="96x96" width="96" height="96">
+    <link rel="icon" type="image/png" href="assets/favicon/128x128@2x.png" sizes="128x128" width="128" height="128">
+
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/Webclips/120x120@2x.png" width="120" height="120">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/Webclips/152x152@2x.png" width="152" height="152">
+    <link rel="apple-touch-icon" sizes="167x167" href="assets/Webclips/167x167@2x.png" width="167" height="167">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/Webclips/180x180@2x.png" width="180" height="180">
+
+    <!-- PWA / Mobile Icons -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="assets/Webclips/192x192@2x.png" width="192" height="192">
+    <link rel="icon" sizes="512x512" href="assets/Webclips/512x512@2x.png" width="512" height="512">
+
+    <!-- Safari Pinned Tab Icon -->
+    <link rel="mask-icon" href="assets/favicon/32x32.svg" color="#EC4524">
+
+    <!-- Microsoft Tiles -->
+    <meta name="msapplication-TileColor" content="#EC4524">
+    <meta name="msapplication-TileImage" content="assets/Webclips/144x144@2x.png" width="144" height="144">
+
+    <!-- Other Meta Tags -->
+    <meta name="theme-color" content="#EC4524">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>Lehigh Valley Digital </title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://ka-f.fontawesome.com/releases/v6.5.1/css/free.min.css" as="style">
+    <link href="https://ka-f.fontawesome.com/releases/v6.5.1/css/free.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add this to hide menu and UI elements initially */
+        .navbar-menu, 
+        .mobile-menu,
+        .mobile-menu-btn,
+        .nav-contact-btn {
+            visibility: hidden;
+        }
+        
+        /* Only show elements once JS is loaded */
+        .js-loaded .navbar-menu,
+        .js-loaded .mobile-menu,
+        .js-loaded .mobile-menu-btn,
+        .js-loaded .nav-contact-btn {
+            visibility: visible;
+            /* Add smooth transition */
+            transition: visibility 0s, opacity 0.3s ease-in-out;
+        }
+
+        /* Add a dark background color to prevent white flash */
+        body {
+            background-color: #1a1a1a; /* Or whatever dark color matches your design */
+        }
+
+        .bottom-text {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-top: 2rem;
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 0.25rem 0;
+            color: #ffffff;
+            font-family: 'Glancyr', sans-serif;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        /* Add this to prevent FOUC (Flash of Unstyled Content) */
+        html, body {
+            background-color: #1a1a1a !important;
+        }
+        .page-wrapper {
+            background: #000000 !important;
+            border-radius: 40px !important;
+            opacity: 1 !important;
+        }
+
+        /* Hide the original comparison table on mobile */
+        @media (max-width: 768px) {
+            .comparison-table {
+                display: none;
+            }
+
+            /* Optional: Show a mobile-friendly alternative */
+            .comparison-mobile {
+                display: block;
+            }
+        }
+
+        /* Hide mobile version on desktop */
+        @media (min-width: 769px) {
+            .comparison-mobile {
+                display: none;
+            }
+        }
+
+        .difference {
+            background: #050505;
+            padding: 100px 5%;
+            color: white;
+            position: relative;
+            z-index: 3;
+            overflow: hidden;
+        }
+
+        .difference-container {
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .difference-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .difference-left {
+            position: sticky;
+            top: 100px;
+            max-width: 600px;
+        }
+
+        .difference-left h2 {
+            font-family: 'Glancyr', sans-serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 30px;
+        }
+
+        .difference-left h2 .highlight {
+            color: #EC4524;
+        }
+
+        .difference-left p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+            text-align: left;
+        }
+
+        .difference-boxes {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .difference-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: clamp(30px, 4vw, 45px);
+            font-size: clamp(1rem, 2vw, 1.5rem);
+            font-family: 'Satoshi', sans-serif;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            transform: translateY(20px);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            will-change: transform;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .difference-box:before,
+        .difference-box:after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            pointer-events: none;
+            will-change: transform, opacity;
+        }
+
+        .difference-box:before {
+            background: linear-gradient(135deg, 
+                rgba(236, 69, 36, 0.15) 0%, 
+                rgba(255, 255, 255, 0.05) 50%,
+                rgba(236, 69, 36, 0.1) 100%
+            );
+            transform: translateX(-100%) rotate(-45deg);
+        }
+
+        .difference-box:after {
+            background: linear-gradient(135deg,
+                rgba(255, 255, 255, 0.05) 0%,
+                rgba(236, 69, 36, 0.1) 50%,
+                rgba(255, 255, 255, 0.05) 100%
+            );
+            transform: translateX(100%) rotate(45deg);
+        }
+
+        @media (hover: hover) {
+            .difference-box:hover {
+                transform: translateY(-5px) scale(1.02);
+                border-color: rgba(236, 69, 36, 0.4);
+                box-shadow: 0 10px 30px -10px rgba(236, 69, 36, 0.3);
+            }
+
+            .difference-box:hover:before,
+            .difference-box:hover:after {
+                opacity: 1;
+                transform: translateX(0) rotate(0);
+            }
+
+            .difference-box:hover span {
+                transform: scale(1.05);
+                text-shadow: 0 0 20px rgba(236, 69, 36, 0.3);
+            }
+        }
+
+        /* Active state for touch devices */
+        @media (hover: none) {
+            .difference-box:active {
+                transform: translateY(-2px) scale(1.01);
+                border-color: rgba(236, 69, 36, 0.4);
+            }
+
+            .difference-box:active:before,
+            .difference-box:active:after {
+                opacity: 1;
+                transform: translateX(0) rotate(0);
+            }
+        }
+
+        .difference-box span {
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1200px) {
+            .difference {
+                padding: 80px 5%;
+            }
+            
+            .difference-layout {
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .difference-layout {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .difference-left {
+                position: relative;
+                top: 0;
+                max-width: 100%;
+                text-align: center;
+            }
+
+            .difference-left p {
+                text-align: center;
+                margin: 0 auto;
+                max-width: 600px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .difference {
+                padding: 60px 5%;
+            }
+
+            .difference-box {
+                padding: 25px 20px;
+                min-height: 80px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .difference {
+                padding: 40px 5%;
+            }
+
+            .difference-left h2 {
+                font-size: 2rem;
+            }
+
+            .difference-box {
+                padding: 20px 15px;
+                font-size: 1rem;
+            }
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .tech-category {
+            flex: 1;
+        }
+
+        .tech-category h4 {
+            color: #EC4524;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .tech-category ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tech-category li {
+            background: rgba(236, 69, 36, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+        }
+
+        .tech-category li:hover {
+            background: rgba(236, 69, 36, 0.2);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .tech-stack {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #EC4524;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .price .original {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: line-through;
+            font-weight: 400;
+        }
+
+        .price .new {
+            color: #EC4524;
+        }
+
+        /* Tab Buttons */
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 1px solid #EC4524;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin: 0 5px;
+        }
+
+        .tab-btn.active {
+            background: #EC4524;
+            color: white;
+            border: 1px solid #EC4524;
+        }
+
+        /* Add content-visibility to improve performance */
+        .features,
+        .philosophy,
+        .difference,
+        .testimonials,
+        .pricing,
+        .faq {
+            content-visibility: auto;
+            contain-intrinsic-size: 1px 5000px;
+        }
+
+        /* Optimize animations for performance */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* Improve color contrast for accessibility */
+        .price .original {
+            color: rgba(255, 255, 255, 0.5); /* Increased from 0.3 */
+        }
+
+        .features-list li {
+            color: rgba(255, 255, 255, 0.9); /* Increased from 0.8 */
+        }
+    </style>
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="assets/fonts/Glancyr-Light.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="assets/fonts/Glancyr-Medium.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="assets/fonts/Satoshi-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/Satoshi-Medium.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Add preload for critical CSS -->
+    <link rel="preload" href="styles.css" as="style">
+    
+    <!-- Add preload for critical JavaScript -->
+    <link rel="preload" href="main.js" as="script">
+</head>
+<body>
+    <div class="loading-screen">
+        <div class="loading-text go-digital">GO <span class="digital-glitch">DIGITAL</span></div>
+        <div class="loading-text stay-visible">STAY VISIBLE</div>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+    </div>
+    <div class="page-wrapper">
+        <div class="gradient-bg"></div>
+        <div class="gradient-overlay"></div>
+        <div class="particles" id="particles"></div>
+     
+        <!-- Navbar -->
+        <header class="navbar">
+            <div class="navbar-logo">
+                <a href="/">
+                    <img src="assets/images/logo.png" alt="Lehigh Valley Digital Logo" width="120" height="40">
+                </a>
+            </div>
+            
+            <!-- Desktop Menu (Unchanged) -->
+            <ul class="navbar-menu">
+                <li><a href="#about">Philosophy</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#difference">The Difference</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#faqs">FAQs</a></li>
+                <li><a href="https://outlook.office365.com/book/LehighValleyDigital@Captiv8.global/s/00X_YSLpAEup8fkCCi1chA2" class="nav-contact-btn" target="_blank">Book a Call</a></li>
+            </ul>
+
+            <!-- Mobile-only elements -->
+            <button class="mobile-menu-btn" aria-label="Toggle menu" role="button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="mobile-menu">
+                <ul class="mobile-menu-items">
+                    <li><a href="#about">Philosophy</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#difference">The Difference</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#faqs">FAQs</a></li>
+                    <li><a href="https://outlook.office365.com/book/LehighValleyDigital@Captiv8.global/s/00X_YSLpAEup8fkCCi1chA2" class="nav-contact-btn" target="_blank">Book a Call</a></li>
+                </ul>
+            </div>
+        </header>
+     
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>GO DIGITAL<br>STAY VISIBLE</h1>
+                <p>Digital Solutions Every LV Business Can Afford</p>
+                <button onclick="scrollToSection('contact')">Get Started</button>
+            </div>
+        </section>
+        <div class="section-transition"></div>
+        <!-- Philosophy Section -->
+        <section class="philosophy" id="about">
+            <div class="philosophy-header">
+                <div class="tag">Our Philosophy</div>
+                <h2>Affordable Excellence</br>In The Digital Age</h2>
+            </div>
+            
+            <div class="philosophy-cards">
+                <div class="philosophy-card">
+                    <div class="card-icon">📱</div>
+                    <h3>Technology Evolution</h3>
+                    <p>Just as cell phones became accessible to everyone, we're making premium digital solutions available to all businesses.</p>
+                </div>
+                
+                <div class="philosophy-card">
+                    <div class="card-icon">💰</div>
+                    <h3>Fair Pricing</h3>
+                    <p>We reject the industry's inflated pricing, offering custom-coded solutions at template-based prices.</p>
+                </div>
+                
+                <div class="philosophy-card">
+                    <div class="card-icon">🚀</div>
+                    <h3>Future Ready</h3>
+                    <p>Your digital presence should grow with your business, not hold it back. We build scalable solutions that evolve.</p>
+                </div>
+            </div>
+
+            <div class="philosophy-timeline">
+                <div class="timeline-item">
+                    <div class="year">1940s</div>
+                    <div class="item-content">
+                        <span class="tech-item">TVs: <br>$4,000</span>
+                        <div class="price-tag">≈ $500 Now</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">1980s</div>
+                    <div class="item-content">
+                        <span class="tech-item">Computers: <br> $9000</span>
+                        <div class="price-tag">≈ $600 Now</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">1990s</div>
+                    <div class="item-content">
+                        <span class="tech-item">Cell Phones: $4000</span>
+                        <div class="price-tag">≈ $700 Now</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="year">2000s</div>
+                    <div class="item-content">
+                        <span class="tech-item">Apps: <br>$400,000</span>
+                        <div class="price-tag">≈ $75,000 Now</div>
+                    </div>
+                </div>
+                <div class="timeline-item active">
+                    <div class="year">Today</div>
+                    <div class="item-content">
+                        <span class="tech-item">Digital Solutions</span>
+                        <div class="price-tag">Finally Affordable</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+     
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <div class="features-header">
+                <h2>Why Lehigh Valley Digital<br>Is The <span class="highlight">Right</span> Choice</h2>
+                <p>We're passionate about bringing the benefits of affordable, high-quality digital solutions to small businesses. Here's how we ensure our clients receive unparalleled value:</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-front">
+                        <div class="emoji">💻</div>
+                        <h3>Custom-Coded Excellence</h3>
+                    </div>
+                    <div class="feature-back">
+                        <p>Every website we build is meticulously custom-coded to reflect your brand identity and meet your specific needs. Unlike template solutions, you retain full ownership of your site, giving you the freedom to expand and adapt as your business grows.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-front">
+                        <div class="emoji">💎</div>
+                        <h3>Affordable Innovation</h3>
+                    </div>
+                    <div class="feature-back">
+                        <p>Just as flat-screen TVs and smartphones became more accessible over time, our innovative methodologies and efficient processes ensure you get premium-quality digital solutions at a fraction of the traditional cost.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-front">
+                        <div class="emoji">🚀</div>
+                        <h3>Scalable and Future-Proof</h3>
+                    </div>
+                    <div class="feature-back">
+                        <p>Your business is dynamic, and so should your website be. Our solutions are designed to grow with you, accommodating new features and functionality as your needs evolve. This future-proofing approach ensures your investment pays off for years to come.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-front">
+                        <div class="emoji">⚡</div>
+                        <h3>Lean and Efficient Operations</h3>
+                    </div>
+                    <div class="feature-back">
+                        <p>We run a streamlined, focused agency, avoiding unnecessary overhead like extravagant offices and oversized teams. This efficiency allows us to channel resources directly into delivering the best results for you, maximizing your return on investment.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-front">
+                        <div class="emoji">🤝</div>
+                        <h3>Client-Centric Partnerships</h3>
+                    </div>
+                    <div class="feature-back">
+                        <p>Your success is our mission. We take the time to understand your goals, ensuring every project is tailored to your needs. Our collaborative approach ensures your voice is heard at every step, resulting in solutions that truly reflect your vision.</p>
+                    </div>
+                </div>
+                <div class="feature">
+                    <div class="feature-front">
+                        <div class="emoji">💡</div>
+                        <h3>Innovative by Design</h3>
+                    </div>
+                    <div class="feature-back">
+                        <p>Innovation drives everything we do. By staying on top of the latest technologies, trends, and best practices, we ensure your business remains competitive and ahead of the curve in an ever-changing digital landscape.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+     
+        <!-- The Difference Section -->
+        <section class="difference" id="difference">
+            <div class="difference-container">
+                <div class="difference-layout">
+                    <div class="difference-left">
+                        <h2>The <span class="highlight">Difference</span><br>That Drives Results</h2>
+                        <p>Discover how our innovative approach and commitment to excellence create unmatched value for your business. We combine cutting-edge technology with proven strategies to deliver solutions that truly stand out.</p>
+                    </div>
+                    <div class="difference-right">
+                        <div class="difference-boxes">
+                            <div class="difference-box">Custom Solutions That Scale</div>
+                            <div class="difference-box">Transparent Code Ownership</div>
+                            <div class="difference-box">Affordable Premium Quality</div>
+                            <div class="difference-box">Future-Proof Technology</div>
+                            <div class="difference-box">Local Support & Expertise</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+     
+
+        <!-- Mobile comparison version -->
+        <div class="comparison-mobile">
+            <div class="comparison-card">
+                <h3>Why Choose Lehigh Valley Digital?</h3>
+                <ul class="comparison-list">
+                    <li>✓ Full Code Ownership</li>
+                    <li>✓ Complete Access & Reports</li>
+                    <li>✓ Custom-Coded Solutions</li>
+                    <li>✓ Designed for Growth</li>
+                    <li>✓ Affordable Pricing</li>
+                </ul>
+            </div>
+        </div>
+     
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <h2>What Our Clients Are Saying</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-card">
+                    <div class="quote-mark">"</div>
+                    <h3>Working with Lehigh Valley Digital transformed our online presence completely.</h3>
+                    <p>Their innovative approach to web design and dedication to understanding our business needs exceeded our expectations. The custom solution they delivered not only looks stunning but has significantly improved our customer engagement and conversion rates.</p>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Sarah Mitchell</h4>
+                            <span>Marketing Director, TechFlow Solutions</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-controls">
+                    <button class="prev-btn" aria-label="Previous testimonial">←</button>
+                    <button class="next-btn" aria-label="Next testimonial">→</button>
+                </div>
+            </div>
+        </section>
+     
+        <!-- Pricing Section -->
+        <section class="pricing" id="pricing">
+            <div class="pricing-header">
+                <h2>Transparent Pricing<br>For Every Business</h2>
+                <p>Choose the package that best fits your needs. All prices include full code ownership and detailed documentation.</p>
+            </div>
+
+            <!-- Tab Buttons -->
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="branding">Branding</button>
+                <button class="tab-btn" data-tab="websites">Websites</button>
+                <button class="tab-btn" data-tab="new-websites">Social Media</button>
+            </div>
+
+            <div class="pricing-content">
+                <!-- Branding Packages -->
+                <div class="pricing-tab active" id="branding">
+                    <div class="pricing-grid">
+                        <div class="pricing-card">
+                            <div class="card-header">
+                                <h3>Basic</h3>
+                                <div class="price">
+                                    <div class="original" data-save="SAVE 60%">$499</div>
+                                    <div class="new">$199</div>
+                                </div>
+                            </div>
+                            <ul class="features-list">
+                                <li>✨ Three Logo Concepts</li>
+                                <li>✨ Two Revisions</li>
+                                <li>✨ Brand Color Palette</li>
+                                <li>✨ Typography Selection</li>
+                                <li>✨ Basic Brand Guidelines</li>
+                                <li>✨ Source Files Included</li>
+                                <li>✨ Social Media Kit</li>
+                            </ul>
+                            <button class="pricing-btn" onclick="scrollToSection('contact')">Get Started</button>
+                        </div>
+
+                        <div class="pricing-card standard">
+                            <div class="card-header">
+                                <h3>Standard</h3>
+                                <div class="price">
+                                    <div class="original" data-save="SAVE 70%">$1,499</div>
+                                    <div class="new">$699</div>
+                                </div>
+                            </div>
+                            <ul class="features-list">
+                                <li>✨ Five Logo Concepts</li>
+                                <li>✨ Unlimited Revisions</li>
+                                <li>✨ Complete Brand Identity</li>
+                                <li>✨ Custom Typography</li>
+                                <li>✨ Comprehensive Guidelines</li>
+                                <li>✨ Business Card Design</li>
+                                <li>✨ Letterhead Design</li>
+                                <li>✨ Social Media Kit</li>
+                                <li>✨ Email Signature</li>
+                                <li>✨ Source Files Included</li>
+                            </ul>
+                            <button class="pricing-btn" onclick="scrollToSection('contact')">Get Started</button>
+                        </div>
+
+                        <div class="pricing-card">
+                            <div class="card-header">
+                                <h3>Premium</h3>
+                                <div class="price">
+                                    <div class="original" data-save="SAVE 80%">$2,999</div>
+                                    <div class="new">$1,499</div>
+                                </div>
+                            </div>
+                            <ul class="features-list">
+                                <li>✨ Everything in Standard, plus:</li>
+                                <li>✨ Brand Strategy Session</li>
+                                <li>✨ Market Research Report</li>
+                                <li>✨ Brand Voice Guidelines</li>
+                                <li>✨ Custom Icon Set</li>
+                                <li>✨ Marketing Collateral</li>
+                                <li>✨ Presentation Template</li>
+                                <li>✨ Brand Style Guide</li>
+                                <li>✨ 1-Year Brand Support</li>
+                                <li>✨ Priority Service</li>
+                            </ul>
+                            <button class="pricing-btn" onclick="scrollToSection('contact')">Get Started</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Website Packages -->
+                <div class="pricing-tab" id="websites">
+                    <div class="pricing-grid">
+                        <div class="pricing-card">
+                            <div class="card-header">
+                                <h3>Basic</h3>
+                                <div class="price">
+                                    <div class="original" data-save="SAVE 75%">$1,999</div>
+                                    <div class="new">$499</div>
+                                </div>
+                                <div class="setup-fee">$49/mo</div>
+                            </div>
+                            <ul class="features-list">
+                                <li>✨ Custom Design</li>
+                                <li>✨ Up to 5 Pages</li>
+                                <li>✨ Mobile Responsive</li>
+                                <li>✨ Basic SEO Setup</li>
+                                <li>✨ Contact Form</li>
+                                <li>✨ Social Media Integration</li>
+                                <li>✨ Google Analytics</li>
+                                <li>✨ Basic Security Features</li>
+                                <li>✨ 2 Rounds of Revisions</li>
+                                <li>✨ Training Session</li>
+                            </ul>
+                            <button class="pricing-btn" onclick="scrollToSection('contact')">Get Started</button>
+                        </div>
+
+                        <div class="pricing-card standard">
+                            <div class="card-header">
+                                <h3>Standard</h3>
+                                <div class="price">
+                                    <div class="original" data-save="SAVE 80%">$3,999</div>
+                                    <div class="new">$999</div>
+                                </div>
+                                <div class="setup-fee">$79/mo</div>
+                            </div>
+                            <ul class="features-list">
+                                <li>✨ Everything in Basic, plus:</li>
+                                <li>✨ Up to 10 Pages</li>
+                                <li>✨ Advanced SEO Package</li>
+                                <li>✨ Content Management System</li>
+                                <li>✨ Blog Integration</li>
+                                <li>✨ E-commerce (up to 50 products)</li>
+                                <li>✨ Custom Animations</li>
+                                <li>✨ Premium Security Suite</li>
+                                <li>✨ Unlimited Revisions</li>
+                                <li>✨ Priority Support</li>
+                            </ul>
+                            <button class="pricing-btn" onclick="scrollToSection('contact')">Get Started</button>
+                        </div>
+
+                        <div class="pricing-card">
+                            <div class="card-header">
+                                <h3>Premium</h3>
+                                <div class="price">
+                                    <div class="original" data-save="SAVE 85%">$7,999</div>
+                                    <div class="new">$2,499</div>
+                                </div>
+                                <div class="setup-fee">$149/mo</div>
+                            </div>
+                            <ul class="features-list">
+                                <li>✨ Everything in Standard, plus:</li>
+                                <li>✨ Unlimited Pages</li>
+                                <li>✨ Custom Functionality</li>
+                                <li>✨ Advanced E-commerce</li>
+                                <li>✨ API Integrations</li>
+                                <li>✨ Performance Optimization</li>
+                                <li>✨ Advanced Analytics</li>
+                                <li>✨ Multi-language Support</li>
+                                <li>✨ 24/7 Priority Support</li>
+                                <li>✨ Monthly Strategy Call</li>
+                            </ul>
+                            <button class="pricing-btn" onclick="scrollToSection('contact')">Get Started</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Media Section -->
+                <div class="pricing-tab" id="new-websites" style="display: none;">
+                    <div class="pricing-grid">
+                        <div class="pricing-card">
+                            <div class="card-header">
+                                <h3>Basic </h3>
+                                <div class="price">
+                                    <div class="original" data-save="SAVE 63%">$799</div>
+                                    <div class="new">$299</div>
+                                </div>
+                                <div class="setup-fee">$199/mo</div>
+                            </div>
+                            <ul class="features-list">
+                                <li>✨ 2 Platforms Management</li>
+                                <li>✨ 12 Posts per Month</li>
+                                <li>✨ Basic Content Strategy</li>
+                                <li>✨ Community Management</li>
+                                <li>✨ Monthly Analytics Report</li>
+                                <li>✨ Basic Graphics Design</li>
+                                <li>✨ Hashtag Research</li>
+                                <li>✨ Engagement Monitoring</li>
+                            </ul>
+                            <button class="pricing-btn" onclick="scrollToSection('contact')">Get Started</button>
+                        </div>
+
+                        <div class="pricing-card standard">
+                            <div class="card-header">
+                                <h3>Standard</h3>
+                                <div class="price">
+                                    <div class="original" data-save="SAVE 75%">$1,499</div>
+                                    <div class="new">$599</div>
+                                </div>
+                                <div class="setup-fee">$399/mo</div>
+                            </div>
+                            <ul class="features-list">
+                                <li>✨ 4 Platforms Management</li>
+                                <li>✨ 20 Posts per Month</li>
+                                <li>✨ Advanced Content Strategy</li>
+                                <li>✨ Community Management</li>
+                                <li>✨ Weekly Analytics Reports</li>
+                                <li>✨ Custom Graphics Design</li>
+                                <li>✨ Competitor Analysis</li>
+                                <li>✨ Story/Reel Creation</li>
+                                <li>✨ Ad Campaign Setup</li>
+                                <li>✨ Social Media Audit</li>
+                            </ul>
+                            <button class="pricing-btn" onclick="scrollToSection('contact')">Get Started</button>
+                        </div>
+
+                        <div class="pricing-card">
+                            <div class="card-header">
+                                <h3>Premium</h3>
+                                <div class="price">
+                                    <div class="original" data-save="SAVE 87%">$2,999</div>
+                                    <div class="new">$999</div>
+                                </div>
+                                <div class="setup-fee">$799/mo</div>
+                            </div>
+                            <ul class="features-list">
+                                <li>✨ All Platforms Management</li>
+                                <li>✨ 30 Posts per Month</li>
+                                <li>✨ Custom Content Strategy</li>
+                                <li>✨ Priority Support</li>
+                                <li>✨ Daily Engagement</li>
+                                <li>✨ Premium Graphics</li>
+                                <li>✨ Video Content Creation</li>
+                                <li>✨ Influencer Outreach</li>
+                                <li>✨ Advanced Ad Campaigns</li>
+                                <li>✨ Monthly Strategy Calls</li>
+                            </ul>
+                            <button class="pricing-btn" onclick="scrollToSection('contact')">Get Started</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+     
+        <!-- FAQ Section -->
+        <section class="faq" id="faqs">
+            <div class="faq-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Answers to common questions about our services and expertise.</p>
+            </div>
+            
+            <div class="faq-container">
+                <!-- General Questions -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Why should I choose Lehigh Valley Digital over other agencies?</span>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>At Lehigh Valley Digital, we offer custom-coded websites and digital solutions that are tailored to your business needs at an affordable price. Unlike template-based agencies, we focus on scalable, future-proof solutions that grow with your business while delivering exceptional value. Additionally, every client is set up with their own GitHub account where they own all their code and have access to a comprehensive, easy-to-understand report that outlines every part of their code.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How are your prices so affordable without compromising quality?</span>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We leverage mature technologies, streamlined processes, and a lean operational structure to keep costs low while maintaining high-quality standards. This means your investment goes directly into results, not overhead. Plus, with access to your GitHub repository and a detailed code report, you can see exactly what you're paying for—no hidden work or technical ambiguity.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What makes your approach innovative?</span>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We stay ahead of the curve by adopting the latest tools, frameworks, and trends in the digital space. From advanced coding techniques to customized branding, we ensure your digital presence is modern, competitive, and effective. Our commitment to transparency, including the ability for clients to review and own their code, reflects our dedication to education and empowerment.</p>
+                    </div>
+                </div>
+
+                <!-- Branding Packages -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do you handle website maintaince and updates?</span>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer comprehensive maintenance packages that include regular updates, security patches, performance optimization, and content updates. Our team monitors your site 24/7 for any issues and proactively addresses them. We also provide monthly reports detailing your website's performance and any maintenance performed.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What technologies does Lehigh Valley Digital use?</span>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="tech-stack">
+                            <div class="tech-category">
+                                <h4>Frontend</h4>
+                                <ul>
+                                    <li>React</li>
+                                    <li>Vue.js</li>
+                                    <li>Angular</li>
+                                    <li>Next.js</li>
+                                    <li>TypeScript</li>
+                                    <li>Tailwind CSS</li>
+                                    <li>Bootstrap</li>
+                                    <li>Svelte</li>
+                                    <li>Webflow</li>
+                                </ul>
+                            </div>
+                            <div class="tech-category">
+                                <h4>Backend</h4>
+                                <ul>
+                                    <li>Node.js</li>
+                                    <li>Express.js</li>
+                                    <li>Python</li>
+                                    <li>Django</li>
+                                    <li>PHP</li>
+                                    <li>Java</li>
+                                    <li>Ruby on Rails</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Website Packages -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What's the advantage of choosing a custom-coded website?</span>
+                        <div class="faq-icon">+</div>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Custom-coded websites are uniquely designed to reflect your brand and meet your specific needs. Unlike template-based sites, you'll have full ownership and flexibility to expand or modify your site as your business evolves. Plus, every client is provided with their own GitHub account, where all your code is stored. Along with this, you'll receive a clear, non-technical report breaking down every part of your code, ensuring you understand exactly how your website works.</p>
+                    </div>
+                </div>
+
+                <!-- Continue with remaining FAQs... -->
+            </div>
+        </section>
+     
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <img src="assets/images/Handshake Icon.png" alt="Handshake Icon" class="contact-icon" width="80" height="80" loading="lazy">
+            <h2>Tell Us about Your<br>Next Project</h2>
+            <div class="contact-buttons">
+                <a href="https://outlook.office365.com/book/LehighValleyDigital@Captiv8.global/s/00X_YSLpAEup8fkCCi1chA2" class="btn btn-primary" target="_blank">Book a Call</a>
+                <a href="mailto:hello@lvdigital.agency" class="btn btn-secondary">Email Us</a>
+            </div>
+        </section>
+
+        <!-- Copyright Section -->
+        <footer class="copyright">
+            <p><br><br><br><br>&copy; 2024 Lehigh Valley Digital. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Replace all script content with these script tags -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" defer></script>
+    <script src="main.js" defer></script>
+</body>
+</html>
